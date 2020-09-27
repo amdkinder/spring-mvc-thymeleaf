@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+          integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" th:href="@{/index.css}">
+</head>
+<body>
+<div th:replace="layout/header :: header"></div>
+<div class="container mt-5">
+    <a href="/employer" class="btn btn-secondary btn-sm">
+        <i class="fa fa-arrow-left"></i>
+        back</a>
+
+    <div class="page mx-auto" size="A4">
+        <a th:href="'/employer/' + ${employer.id} + '/edit'" class="section row">
+            <div class="col">
+                <h2 class="primary" th:text="${employer.name}"></h2>
+            </div>
+            <div class="col">
+                <div class="text-right employer-section">
+                    <b>Email: </b><span th:text="${employer.email}"></span>
+                    <br>
+                    <b>Address: </b><span th:text="${employer.address}"></span>
+                    <br>
+                    <b>Phone: </b><span th:text="${employer.phone}"></span>
+                    <br>
+                    <b>Birth day: </b><span th:text="${employer.birthday}"></span>
+                </div>
+            </div>
+            <div class="overlay">
+                <i class="icon fa fa-pencil"></i>
+            </div>
+        </a>
+        <hr>
+        <a th:href="'/employer/' + ${employer.id} + '/edit'" class="section row">
+            <div class="col-lg-6">
+                <h4>OBJECTIVE</h4>
+            </div>
+            <div class="col-lg-6">
+                <p th:text="${employer.objective}"></p>
+            </div>
+            <div class="overlay">
+                <i class="icon fa fa-pencil"></i>
+            </div>
+        </a>
+    </div>
+</div>
+</body>
+</html>
