@@ -9,46 +9,60 @@
 
 </head>
 <body>
-    <div th:replace="layout/header :: header"></div>
-    <div class="container">
+<div th:replace="layout/header :: header"></div>
+<div class="container">
     <h2 class="text-center mt-5">
         Employer Update
     </h2>
     <div class="row">
         <div class="col-lg-6 col-md-8 col-sm-12">
-            <form th:method="POST" action="/employer" th:object="${employer}" class="needs-validation" novalidate>
+            <form th:method="POST" th:action="@{${action}}" th:object="${employer}" class="needs-validation" novalidate>
+                <input disabled type="hidden" class="form-control" th:field="${employer.id}" id="id" name="id">
                 <div class="form-group">
                     <label for="name">Name</label>
-                    <input type="text" class="form-control" th:field="${employer.name}" id="name" th:f name="name" required>
+                    <input type="text" class="form-control" th:field="${employer.name}" id="name" name="name" required>
                     <div class="valid-feedback">
                         Looks good!
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="birthday">Birthday</label>
-                    <input type="date" class="form-control" id="birthday" th:field="${employer.birthday}" name="birthday" required>
+                    <input type="date" class="form-control" id="birthday" th:field="${employer.birthday}"
+                           name="birthday" required>
+                </div>
+                <div class="form-group">
+                    <label for="address">Address</label>
+                    <input type="text" class="form-control" th:field="${employer.address}" id="address" name="address"
+                           required>
+                    <div class="valid-feedback">
+                        Looks good!
+                    </div>
                 </div>
                 <div class="form-group">
                     <label for="phone">Phone number</label>
-                    <input type="text" class="form-control" id="phone" th:field="${employer.phone}" name="phone" aria-describedby="phoneHelp"
+                    <input type="text" class="form-control" id="phone" th:field="${employer.phone}" name="phone"
+                           aria-describedby="phoneHelp"
                            required>
                     <small id="phoneHelp" class="form-text text-muted">(99 999 99 99)</small>
                 </div>
                 <div class="form-group">
                     <label for="email">Email</label>
-                    <input type="email" class="form-control" id="email" th:field="${employer.email}" name="email" aria-describedby="emailHelp"
+                    <input type="email" class="form-control" id="email" th:field="${employer.email}" name="email"
+                           aria-describedby="emailHelp"
                            required>
                     <small id="emailHelp" class="form-text text-muted">example@mail.ru</small>
                 </div>
                 <div class="form-group">
                     <label for="objective">Objective</label>
-                    <textarea class="form-control" id="objective" rows="5" th:field="${employer.objective}" name="objective" required></textarea>
+                    <textarea class="form-control" id="objective" rows="5" th:field="${employer.objective}"
+                              name="objective" required></textarea>
                 </div>
                 <a href="/employer" class="btn btn-secondary">
                     <i class="fa fa-arrow-left"></i>
-                    back</a>   <button type="submit" class="btn btn-primary float-right">
-                save
-            </button>
+                    back</a>
+                <button type="submit" class="btn btn-primary float-right">
+                    save
+                </button>
             </form>
         </div>
 

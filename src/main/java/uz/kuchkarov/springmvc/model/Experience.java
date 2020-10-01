@@ -1,17 +1,24 @@
 package uz.kuchkarov.springmvc.model;
 
+import javax.persistence.*;
 import java.time.LocalDate;
-
+@Entity
+@Table(name = "experience")
 public class Experience {
 
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String position;
-    private String Company;
+    private String company;
     private String location;
     private LocalDate startDate;
     private LocalDate endDate;
     private Boolean inJobNow;
     private String events;
+
+    @ManyToOne
+    @JoinColumn(nullable = false)
+    private Employer employer;
 
     public Experience() {
     }
@@ -19,12 +26,20 @@ public class Experience {
     public Experience(Long id, String position, String company, String location, LocalDate startDate, LocalDate endDate, Boolean inJobNow, String events) {
         this.id = id;
         this.position = position;
-        Company = company;
+        this.company = company;
         this.location = location;
         this.startDate = startDate;
         this.endDate = endDate;
         this.inJobNow = inJobNow;
         this.events = events;
+    }
+
+    public Employer getEmployer() {
+        return employer;
+    }
+
+    public void setEmployer(Employer employer) {
+        this.employer = employer;
     }
 
     public Long getId() {
@@ -44,11 +59,11 @@ public class Experience {
     }
 
     public String getCompany() {
-        return Company;
+        return company;
     }
 
     public void setCompany(String company) {
-        Company = company;
+        this.company = company;
     }
 
     public String getLocation() {

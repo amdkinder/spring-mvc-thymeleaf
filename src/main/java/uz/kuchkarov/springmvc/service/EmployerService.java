@@ -1,53 +1,42 @@
 package uz.kuchkarov.springmvc.service;
 
+import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
+import uz.kuchkarov.springmvc.exception.NotFoundException;
 import uz.kuchkarov.springmvc.model.Employer;
+import uz.kuchkarov.springmvc.repo.EmployerRepository;
 
-import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
 public class EmployerService {
 
-    private Long counter = 0L;
-    private final List<Employer> employers = new ArrayList<>();
+    private final EmployerRepository employerRepository;
 
-    {
-        employers.add(new Employer(++counter, "Tom Jones", LocalDate.now(), "+99896265656", "tom@mail.com", "I am developer", "San Fransisco"));
-        employers.add(new Employer(++counter, "Josh Long", LocalDate.now(), "+99892342353", "josh@mail.com", "I am system admin", "New york"));
-        employers.add(new Employer(++counter, "George Maks", LocalDate.now(), "+99895656566", "george@mail.com", "I am simple worker", "Los Angelos"));
-        employers.add(new Employer(++counter, "Mike Tayson", LocalDate.now(), "+99895562142", "mike@mail.com", "I am boxer", "Manhattan"));
+    public EmployerService(EmployerRepository employerRepository) {
+        this.employerRepository = employerRepository;
     }
 
     public List<Employer> getAll() {
-        return employers;
+        return employerRepository.findAll();
     }
 
     public Employer getOne(Long id) {
-        return employers
-                .stream()
-                .filter(employer -> employer.getId().equals(id))
-                .findAny()
-                .orElse(null);
+        return employerRepository.findById(id).orElseThrow(NotFoundException::new);
+    }
+
+    public Employer edit(Long id, Employer employer) {
+            Employer fromDb = getOne(id);
+            BeanUtils.copyProperties(employer, fromDb, "id");
+            return employerRepository.save(fromDb);
     }
 
     public Employer save(Employer employer) {
-        employer.setId(++counter);
-        employers.add(employer);
-        return employer;
-    }
-
-    public Employer edit(Long id, Employer employer){
-        Employer fromDb = getOne(id);
-        int index = employers.indexOf(fromDb);
-        employer.setId(fromDb.getId());
-        employers.set(index, employer);
-        return employer;
+        return employerRepository.save(employer);
     }
 
     public void delete(Long id) {
         Employer fromDb = getOne(id);
-        employers.remove(fromDb);
+        employerRepository.delete(fromDb);
     }
 }

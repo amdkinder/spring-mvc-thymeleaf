@@ -1,12 +1,30 @@
 package uz.kuchkarov.springmvc.model;
 
+import javax.persistence.*;
+
+@Entity
+@Table(name = "education")
 public class Education {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String place;
     private GraduationDegree graduationDegree;
     private String graduationYear;
     private String location;
+
+    @ManyToOne
+    @JoinColumn(nullable = false)
+    private Employer employer;
+
+    public Employer getEmployer() {
+        return employer;
+    }
+
+    public void setEmployer(Employer employer) {
+        this.employer = employer;
+    }
 
     public Education() {
     }
