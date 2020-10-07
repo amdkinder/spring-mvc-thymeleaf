@@ -13,6 +13,15 @@ public class Education {
     private GraduationDegree graduationDegree;
     private String graduationYear;
     private String location;
+    private String specialization;
+
+    public String getSpecialization() {
+        return specialization;
+    }
+
+    public void setSpecialization(String specialization) {
+        this.specialization = specialization;
+    }
 
     @ManyToOne
     @JoinColumn(nullable = false)

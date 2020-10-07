@@ -24,6 +24,14 @@ public class EducationController {
         this.employerRepository = employerRepository;
     }
 
+    @GetMapping("/{id}/new")
+    public String pushCreateEducation(@PathVariable Long id, Model model) {
+            model.addAttribute("education", new Education());
+            model.addAttribute("action", String.format("/education/%s", id));
+            return "education/education_update";
+
+    }
+
     @PostMapping("/{id}")
     public String save(@PathVariable Long id, Education education, Model model) {
         Employer employer = employerRepository.findById(id).orElseThrow(NotFoundException::new);

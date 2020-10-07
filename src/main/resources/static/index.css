@@ -8,6 +8,7 @@ body {
     padding: 0.5cm 0.1cm;
     border-radius: 5px;
     position: relative;
+    color: #212121;
 }
 .page[size="A4"] {
     position: relative;
