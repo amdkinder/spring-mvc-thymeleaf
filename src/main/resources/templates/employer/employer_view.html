@@ -47,6 +47,7 @@
                 <i class="icon fa fa-pencil"></i>
             </div>
         </a>
+        <hr>
         <div class="section row">
             <div class="col-lg-6">
                 <h4>Education</h4>
@@ -56,9 +57,18 @@
                     <i class="fa fa-plus"></i>
                     Add education</a>
             </div>
-            <div class="row">
-                <div class="col-lg-6"></div>
-                <div class="col-lg-6"></div>
+        </div>
+        <div th:each="education: ${educations}" class="section row">
+            <div class="col-lg-6 font-italic text-secondary">
+                <span th:text="${education.location}" ></span>
+                <br>
+                <span th:text="${education.graduationYear}"></span>
+            </div>
+            <div class="col-lg-6">
+                <h4 class="text-primary font-weight-bold" th:text="${education.place}"></h4>
+                <span th:text="${education.specialization}"></span>
+                <br>
+                <span th:text="${education.graduationDegree}"></span>
             </div>
         </div>
     </div>

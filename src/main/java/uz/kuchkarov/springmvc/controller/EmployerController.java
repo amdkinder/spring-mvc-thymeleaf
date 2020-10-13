@@ -50,6 +50,7 @@ public class EmployerController {
         Employer employer = employerService.getOne(id);
         model.addAttribute("employer", employer);
         model.addAttribute("educations", educationService.getByEmployer(employer));
+        educationService.getByEmployer(employer).forEach(education -> logger.info(education.toString()));
         return "employer/employer_view";
     }
 

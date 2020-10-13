@@ -85,4 +85,17 @@ public class Education {
     public void setLocation(String location) {
         this.location = location;
     }
+
+    @Override
+    public String toString() {
+        return "Education{" +
+                "id=" + id +
+                ", place='" + place + '\'' +
+                ", graduationDegree=" + graduationDegree +
+                ", graduationYear='" + graduationYear + '\'' +
+                ", location='" + location + '\'' +
+                ", specialization='" + specialization + '\'' +
+                ", employer=" + employer +
+                '}';
+    }
 }

@@ -1,7 +1,6 @@
 package uz.kuchkarov.springmvc.service;
 
 import org.springframework.beans.BeanUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import uz.kuchkarov.springmvc.exception.NotFoundException;
 import uz.kuchkarov.springmvc.model.Education;
@@ -16,7 +15,7 @@ public class EducationService {
 
     private final EducationRepository educationRepository;
 
-    public EducationService(EducationRepository educationRepository, EmployerRepository employerRepository) {
+    public EducationService(EducationRepository educationRepository) {
         this.educationRepository = educationRepository;
     }
 
@@ -32,7 +31,7 @@ public class EducationService {
         educationRepository.save(education);
     }
 
-    public Education edit(Long id, Education education){
+    public Education edit(Long id, Education education) {
         Education fromDb = getOne(id);
         BeanUtils.copyProperties(education, fromDb, "id", "employer");
         return educationRepository.save(fromDb);
